@@ -9,7 +9,7 @@ import Search from "../screens/search/Search";
 import SignUp from "../screens/signUp/SignUp";
 import Error from "../screens/error/Error";
 import Adress from "../screens/adress/Adress";
-
+import CardapioPage from "../screens/CardapioPage/CardapioPage";
 
 
 const Router = () => {
@@ -39,6 +39,9 @@ const Router = () => {
                 </Route>
                 <Route exact path="/cart">
                     <Cart />
+                </Route>
+                <Route exact path="/CardapioPage">
+                    <CardapioPage/>
                 </Route>
                 <Route>
                     <Error />
