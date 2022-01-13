@@ -65,7 +65,7 @@ const SignUp = () => {
     return (
         <PageContainer>
             <HeaderBack />
-            <Logo src={LogoFood} />
+            <Logo src={logoFutureEats} />
             <TextStyle> Cadastrar </TextStyle>
             <form onSubmit={onSubmitForm}>
                 <TextField
