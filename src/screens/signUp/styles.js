@@ -54,5 +54,47 @@ text-align: center;
 color: black;
 margin-top: 2vH;
 `
+export const ButtonStyle = styled.button`
+width: 328px;
+  height: 42px;
+  padding: 12px 16px;
+  border-radius: 2px;
+  background-color: #5cb646;
+  width: 296px;
+  height: 18px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  text-align: center;
+  color: var(--black);
+`
+export const BackButton = styled.button`
+    width: 23px;
+    height: 24px;
+    margin: 10px 321px 0 16px;
+    object-fit: contain;
+`
 
-  `
+export const Input = styled(TextField)`
+  width: 340px;
+  height: 56px;
+  margin: 8px 0px 0px;
+  padding: 19px 38px 19px 16px;
+  border-radius: 4px;
+  border: solid 1px #b8b8b8;
+  color: black;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  font-weight: lighter;
+  color: black;
+  
+`
