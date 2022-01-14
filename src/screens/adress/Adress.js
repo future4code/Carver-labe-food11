@@ -1,10 +1,9 @@
 import React, { useState } from "react"
 import useForm from '../../hooks/useForm';
-import Back from '../../assets/back.png'
 import { useHistory } from "react-router";
 import { PageContainer, ButtonContainer, TextStyle } from './styled'
 import { TextField } from "@material-ui/core";
-import axios from 'axios';
+import api from '../../api/request';
 import { goToSearch } from "../../routes/cordinator";
 import HeaderBack from "../../components/HeaderBack";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage"
@@ -20,7 +19,7 @@ const Address = () => {
 
     const registerAddress = (form, clear, history) => {
         setIsLoading(true)
-        axios.put(`${BASE_URL}/address`, form, {
+        api.put(`address`, form, {
             headers: { auth: localStorage.getItem("token") }
         })
             .then((res) => {
