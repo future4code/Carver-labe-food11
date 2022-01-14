@@ -1,10 +1,9 @@
 import React from 'react';
-import Router from "./route/Router"
-
+import Cardapio from './screens/CardapioRestaurante.js/Cardapio';
 const App = () => {
   return (
     <div>
-      <Router />
+      <Cardapio/>
    </div>
   )
 }
