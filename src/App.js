@@ -1,10 +1,10 @@
 import React from 'react';
-import Router from "./route/Router"
+import Restaurant from "../src/screens/Restaurant/Restaurant"
 
 const App = () => {
   return (
     <div>
-      <Router />
+      <Restaurant />
    </div>
   )
 }
