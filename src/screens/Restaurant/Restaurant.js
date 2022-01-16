@@ -1,49 +1,78 @@
-import React from "react";
-import useRequestData from "../../hooks/useRequestData";
-import { BASE_URL } from "../../constants/urls";
-import { CardContent } from '@material-ui/core';
-const Restaurant =()=>{
-    // const Recipes = UseRequestData ([], `${BASE_URL}/restaurants/:restaurantId`)
-    // console.log(Recipes)
-    // const RecipeCards = Recipes.map((recipe)={
-    //     return (
-    //         <RecipeCards
-    //         Key= {recipe.recipe_id}
-    //         title ={recipe.title}
-    //         image= {recipe.image}
-    //          onclick ={()=>null}/>
-    //     )
-    // })
-    return(
-           <CardContent>
-               {/* {recipeCards} */}
-               <p>Olá area de Deatalhes do Restaurant</p>
-           <div>
-               <p>Principais</p>
-               <title>
-                   Nome do Prato
-               </title>
-               <description>
-                   <p>
-                       descrição do pratoa aqui 
-                   </p>
-               </description>
-               <value>
-                   <p>
-                       valor do prato 
-                   </p>
-               </value>
-               <button>
-                   Adicionar 
-               </button>
-           </div>
-           <div>
-               <p>Acompanhamento</p>
-           </div>
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import CardRestaurante from '../../componentes/CardRestaurante/CardRestaurante';
+import { BASE_URL } from '../../constantes/urls'
+import { BordaCard, Categoria, Container, ContainerRestaurante, Endereco, Frete, ImgCard, NomeRestaurante, Tempo, TempoDeCompra } from './styled';
 
-           </CardContent>
-           
-      
-    )
+
+const Restaurante = () => {
+  const [dadoRestaurante, setDadoRestaurante] = useState({});
+  const [dadoProdutos, setDadoProdutos] = useState([]);
+
+  const params = useParams();
+
+  const url = `${BASE_URL}/restaurants/${params.id}`;
+
+  useEffect(() => {
+    axios
+      .get(url, {
+        headers: {
+          auth: token,
+        },
+      })
+      .then((res) => {
+        console.log(res)
+        setDadoRestaurante(res.data.restaurant);
+        setDadoProdutos(res.data.restaurant.products);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  const addCarrinho = () => {
+    //função de adicionar ao carrinho
+  }
+
+  const detalhesDoRestaurante = () => {
+    const dadoProdutosOrdenado = dadoProdutos.sort((a, b) => {
+      return a.category < b.category ? -1 : b.category > a.category ? 1 : 0;
+    });
+    let categoria = "";
+    const renderizaCard =
+      dadoProdutosOrdenado &&
+      dadoProdutosOrdenado.map((detalhe) => {
+        if (detalhe.category !== categoria) {
+          categoria = detalhe.category;
+          return (
+            <div>
+              <BordaCard><h5>{categoria}</h5></BordaCard>
+              <CardRestaurante restauranteId={dadoRestaurante.id} detalhe={detalhe} />
+            </div>
+          );
+        } else {
+          return <CardRestaurante restauranteId={dadoRestaurante.id} detalhe={detalhe} />;
+        }
+      });
+    return <div>{renderizaCard}</div>;
+
+  }
+  return (
+    <Container>
+      <ContainerRestaurante>
+        <ImgCard src={dadoRestaurante.logoUrl} />
+        <NomeRestaurante>{dadoRestaurante.name} </NomeRestaurante>
+        <Categoria>{dadoRestaurante.category} </Categoria>
+        <TempoDeCompra>
+          <Tempo>{dadoRestaurante.deliveryTime} min</Tempo>
+          <Frete>Frete: R$ {dadoRestaurante.shipping},00</Frete>
+        </TempoDeCompra>
+        <Endereco>{dadoRestaurante.address}</Endereco>
+        {detalhesDoRestaurante()}
+      </ContainerRestaurante>
+    </Container >
+  );
 }
-export default Restaurant;
+
+export default Restaurante;
