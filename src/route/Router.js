@@ -9,12 +9,13 @@ import Search from "../screens/search/Search";
 import SignUp from "../screens/signUp/SignUp";
 import Error from "../screens/error/Error";
 import Adress from "../screens/adress/Adress";
-
+import Restaurant from "../screens/Restaurant/Restaurant";
 
 
 const Router = () => {
     return (
         <BrowserRouter>
+          
             <Switch>
                 <Route exact path="/">
                     <Main />
@@ -30,6 +31,9 @@ const Router = () => {
                 </Route>
                 <Route exact path="/home">
                     <Home />
+                </Route>
+                <Route exact path = "/Restaurant">
+                    <Restaurant/>
                 </Route>
                 <Route exact path="/profile">
                     <Profile />
